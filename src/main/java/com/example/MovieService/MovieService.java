@@ -15,4 +15,13 @@ public class MovieService {
     public List<Movie> getAllMovies() {
         return movieStorage.getMovies();
     }
+
+    public Movie getMovieById(String id) {
+        for (Movie movie : movieStorage.getMovies()) {
+            if (id.equals(movie.getId())) {
+                return movie;
+            }
+        }
+        return null;
+    }
 }
