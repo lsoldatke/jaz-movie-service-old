@@ -1,16 +1,16 @@
 package com.example.MovieService;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movieservice")
 public class MovieServiceRestController {
-    private MovieService movieService;
+    private final MovieService movieService;
 
     public MovieServiceRestController(MovieService movieService) {
         this.movieService = movieService;
@@ -21,10 +21,10 @@ public class MovieServiceRestController {
     }
 
     @GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> returnMovie(@PathVariable String id) {
-        Movie movie = movieService.getMovieById(id);
+    public ResponseEntity<Optional<Movie>> returnMovie(@PathVariable Long id) {
+        Optional<Movie> movie = movieService.getMovieById(id);
 
-        if (movie != null) {
+        if (movie.isPresent()) {
             return ResponseEntity.ok(movie);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(movie);
@@ -33,7 +33,7 @@ public class MovieServiceRestController {
 
     @PostMapping("/movies")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
-        if (movie.getId().equals("")) {
+        if (movie.getId() == null) {
             return ResponseEntity.ok(movie);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(movie);

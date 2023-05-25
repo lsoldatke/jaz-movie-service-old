@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String name;
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -14,13 +14,22 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String id, String name, Category category) {
+    public Movie(Long id, String name, Category category) {
         this.id = id;
         this.name = name;
         this.category = category;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                '}';
     }
 }
