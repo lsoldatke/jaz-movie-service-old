@@ -39,4 +39,10 @@ public class MovieServiceRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(movie);
         }
     }
+
+    @PutMapping("/movies/return/{id}")
+    public ResponseEntity<Optional<Movie>> changeAvailabilityToTrue(@PathVariable Long id) {
+        Optional<Movie> movie = movieService.setAvailability(id, true);
+        return ResponseEntity.ok(movie);
+    }
 }

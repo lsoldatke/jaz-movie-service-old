@@ -20,4 +20,9 @@ public class MovieService {
     public Optional<Movie> getMovieById(Long id) {
         return movieRepository.findById(id);
     }
+
+    public Optional<Movie> setAvailability(Long id, boolean availability) {
+        movieRepository.setAvailability(id, availability);
+        return movieRepository.findById(id);
+    }
 }
