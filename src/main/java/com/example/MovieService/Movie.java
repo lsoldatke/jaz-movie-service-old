@@ -1,15 +1,20 @@
 package com.example.MovieService;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Movie ID", example = "12345")
     private Long id;
+    @Schema(description = "Movie name", example = "The Movie")
     private String name;
     @Enumerated(EnumType.STRING)
+    @Schema(description = "Movie category", example = "DOCUMENTARY")
     private Category category;
+    @Schema(description = "Movie availability", example = "true")
     private boolean isAvailable;
 
     public Movie() {
